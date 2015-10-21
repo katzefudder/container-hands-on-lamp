@@ -1,0 +1,18 @@
+apache:
+  build: ./apache
+  hostname: docker.local
+  ports:
+      - 80:80
+  links:
+      - database:database
+  volumes:
+      - "./web:/var/www:rw"
+database:
+    image: mysql/mysql-server:5.6.26
+    hostname: database
+    environment:
+        - MYSQL_ROOT_PASSWORD=
+        - MYSQL_DATABASE=
+        - MYSQL_USER=
+        - MYSQL_PASSWORD=
+        - MYSQL_ALLOW_EMPTY_PASSWORD=yes
