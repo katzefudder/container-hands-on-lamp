@@ -6,7 +6,7 @@ apache:
   links:
       - database:database
   volumes:
-      - "./web:/var/www:rw"
+      - "./web:/var/www/html:rw"
 database:
     image: mysql/mysql-server:5.6.26
     hostname: database
