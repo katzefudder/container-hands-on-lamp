@@ -1,19 +1,9 @@
 FROM ubuntu:15.04
 
-RUN apt-get update && apt-get -y install apache2 php5 php5-mcrypt supervisor curl
+RUN apt-get update
+RUN apt-get -y install apache2 php5
 
-# install composer
-RUN curl -sS https://getcomposer.org/installer | php
-RUN mv composer.phar /usr/local/bin/composer
+WORKDIR /var/www/html
 
-RUN cat /etc/apache2/envvars
-CMD /bin/bash -c "source /etc/apache2/envvars" && /usr/sbin/apache2 -DFOREGROUND
-
-ADD scripts/vhost.conf /etc/apache2/sites-available/
-RUN a2dissite 000-default.conf
-RUN a2ensite vhost.conf
-
-WORKDIR /var/www
-
-ADD scripts/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
-CMD ["/usr/bin/supervisord"]
+ADD scripts/startup.sh /tmp/startup.sh
+CMD ["/tmp/startup.sh"]
