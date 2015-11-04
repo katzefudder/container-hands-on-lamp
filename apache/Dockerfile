@@ -1,7 +1,7 @@
 FROM ubuntu:15.04
 
 RUN apt-get update
-RUN apt-get -y install apache2 php5
+RUN apt-get -y install apache2 php5 php5-mysql mysql-client
 
 WORKDIR /var/www/html
 
